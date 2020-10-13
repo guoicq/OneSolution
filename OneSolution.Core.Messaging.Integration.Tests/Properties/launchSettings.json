@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OneSolution.Core.Messaging.Integration.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Test"
+      }
+    }
+  }
+}

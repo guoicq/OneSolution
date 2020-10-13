@@ -1,0 +1,25 @@
+# node module
+node_modules/
+
+NDependOut/
+
+# C# Project 
+*.ccproj.user
+*.csproj.user
+UpgradeLog.htm
+
+# Nuget package
+packages/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Visual Studo cache/options directory
+.vs/
+*.DotSettings.user
+
+# App Settings
+credentials.json
+appsettings.json
+appsettings.*.json
