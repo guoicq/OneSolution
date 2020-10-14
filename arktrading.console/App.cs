@@ -35,6 +35,8 @@ namespace ArkTrading.ConsoleApp
             //await processor.ProcessYearToDate();
             //await processor.ProcessDate(new DateTime(2020, 8, 26));
             //await processor.ProcessMonth(new DateTime(2020, 8, 1));
+            //Console.WriteLine("Please ENTER to exit.");
+            //Console.ReadLine();
         }
     }
 

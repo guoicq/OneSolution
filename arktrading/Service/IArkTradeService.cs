@@ -4,6 +4,6 @@ namespace ArkTrading.Service
 {
     public interface IArkTradeService
     {
-        Task ProcessFiles(string folder = "C:\\Users\\cguo\\downloads");
+        Task ProcessFiles();
     }
 }
