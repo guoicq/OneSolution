@@ -1,6 +1,8 @@
 ﻿using ArkTrading.DataAccess;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +20,23 @@ namespace ArkTrading.Service
 
         public async Task ProcessFiles(string folder = @"C:\Users\cguo\downloads")
         {
-            var filename = $"{folder}\\ARK_Trade_10092020_0600PM_EST_5f80d45bec705.xls";
-            filename = $"{folder}\\ARK_Trade_10122020_0600PM_EST_5f84ced99bb73.xls";
-            //filename = $"{folder}\\book3.xls";
+            DirectoryInfo d = new DirectoryInfo(folder);
+            // ARK_Trade_10092020_0600PM_EST_5f80d45bec705.xls
+            FileInfo[] Files = d.GetFiles("ARK_Trade_*.xls");
+            foreach (FileInfo file in Files)
+            {
+
+                var filename = file.FullName;
+                Console.WriteLine($"Process file {filename}");
+                await ProcessFile(filename).ConfigureAwait(false);
+                var newName = $"{folder}\\Processed_{file.Name}";
+                File.Move(filename, newName);
+            }
+
+        }
+
+        private async Task ProcessFile(string filename)
+        {
             var records = await tradeDataExcelAccess.Parse(filename);
             if (records.Count > 0)
                 await RemoveDailyRecords(records[0].Date).ConfigureAwait(false);
@@ -29,7 +45,6 @@ namespace ArkTrading.Service
                 r.RecordType = RecordType.Daily;
             });
             await tradeDataAccess.Save(records).ConfigureAwait(false);
-
         }
 
         private async Task RemoveDailyRecords(DateTime date)
