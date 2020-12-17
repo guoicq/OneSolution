@@ -37,12 +37,12 @@ namespace ArkTrading.DataAccess
                 
                 var record = new ArkTradingRecord
                 {
-                    Fund = row.GetCell(0).StringCellValue,
-                    Date = DateTime.Parse(row.GetCell(1).StringCellValue),
-                    Direction = Enum.Parse<TradingDirection>(row.GetCell(2).StringCellValue),
-                    Ticker = row.GetCell(3).StringCellValue,
+                    Fund = formatter.FormatCellValue(row.GetCell(0)),
+                    Date = DateTime.Parse(formatter.FormatCellValue(row.GetCell(1))),
+                    Direction = Enum.Parse<TradingDirection>(formatter.FormatCellValue(row.GetCell(2))),
+                    Ticker = formatter.FormatCellValue(row.GetCell(3)),
                     CusIP = formatter.FormatCellValue(row.GetCell(4)),
-                    Name = row.GetCell(5).StringCellValue,
+                    Name = formatter.FormatCellValue(row.GetCell(5)),
                     Shares = (int)row.GetCell(6).NumericCellValue,
                     PercentOfEtf = row.GetCell(7).NumericCellValue,
                 };
@@ -51,5 +51,7 @@ namespace ArkTrading.DataAccess
 
             return await Task.FromResult(records);
         }
+
+
     }
 }
